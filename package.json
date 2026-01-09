@@ -1,101 +1,70 @@
 {
-  "name": "Grok-Desktop",
-  "version": "1.2.5",
-  "description": "Grok-Desktop application for Grok.com with tab support",
+  "name": "araos-desktop-client",
+  "version": "2.0.0",
+  "description": "AraOS Desktop Client - Thin client for Love-Unlimited Hub (ara-os-desktop)",
   "main": "src/main.js",
   "scripts": {
     "start": "electron .",
+    "dev": "electron . --dev",
     "build": "npx --yes electron-builder@latest --win --x64",
     "pack": "npx --yes electron-builder@latest --dir",
     "build-portable": "npx --yes electron-builder@latest --win portable",
-    "build-dir": "npx --yes electron-builder@latest --dir",
-    "build-installer": "npx --yes electron-builder@latest --win --x64",
     "build-linux": "npx --yes electron-builder@latest --linux",
-    "build-rpm": "npx --yes electron-builder@latest --linux rpm",
-    "build-deb": "npx --yes electron-builder@latest --linux deb",
-    "build-rpm-deb": "npx --yes electron-builder@latest --linux rpm deb",
     "build-all": "npx --yes electron-builder@latest --win --x64 --linux"
   },
   "keywords": [
     "electron",
-    "grok",
+    "araos",
+    "love-unlimited",
     "desktop",
-    "tabs"
+    "client"
   ],
-  "author": "AnRkey <anrkey@gmail.com>",
-  "license": "ISC",
+  "author": "AraOS Team",
+  "license": "MIT",
   "type": "commonjs",
   "dependencies": {
-    "electron-tabs": "^1.0.4"
+    "axios": "^1.6.0",
+    "dotenv": "^16.3.1"
   },
   "devDependencies": {
-    "electron": "^39.1.2"
-  },
-  "overrides": {
-    "form-data": "4.0.4",
-    "tmp": "latest"
+    "electron": "^27.0.0",
+    "electron-builder": "^24.6.4"
   },
   "build": {
-    "appId": "com.grok.desktop",
-    "productName": "Grok Desktop",
+    "appId": "com.araos.client",
+    "productName": "AraOS Client",
     "directories": {
       "output": "build"
     },
     "linux": {
-      "target": [
-        "rpm",
-        "deb"
-      ],
+      "target": ["rpm", "deb"],
       "category": "Network",
       "icon": "build-resources/icons"
     },
     "rpm": {
-      "artifactName": "Grok-Desktop-v${version}.${ext}"
+      "artifactName": "AraOS-Client-v${version}.${ext}"
     },
     "deb": {
-      "artifactName": "Grok-Desktop-v${version}.${ext}"
+      "artifactName": "AraOS-Client-v${version}.${ext}"
     },
     "win": {
-      "target": [
-        "nsis",
-        "msi",
-        "portable"
-      ],
-      "icon": "src/grok.png",
+      "target": ["nsis", "portable"],
+      "icon": "src/ara-icon.png",
       "forceCodeSigning": false,
-      "artifactName": "Grok-Desktop_Archive-v${version}.${ext}"
+      "artifactName": "AraOS_Client_Archive-v${version}.${ext}"
     },
     "nsis": {
       "oneClick": false,
       "allowToChangeInstallationDirectory": true,
       "createDesktopShortcut": true,
       "createStartMenuShortcut": true,
-      "shortcutName": "Grok Desktop",
-      "artifactName": "Grok-Desktop_Installer-v${version}.exe"
-    },
-    "msi": {
-      "artifactName": "Grok-Desktop_Installer-v${version}.msi"
+      "shortcutName": "AraOS Client",
+      "artifactName": "AraOS_Client_Installer-v${version}.exe"
     },
     "portable": {
-      "artifactName": "Grok-Desktop_Portable-v${version}.exe"
+      "artifactName": "AraOS_Client_Portable-v${version}.exe"
     },
     "compression": "maximum",
-    "asar": true,
-    "asarUnpack": [],
-    "extraResources": [],
-    "files": [
-      "**/*",
-      "!**/node_modules/*/{CHANGELOG.md,README.md,README,readme.md,readme}",
-      "!**/node_modules/*/{test,__tests__,tests,powered-test,example,examples}",
-      "!**/node_modules/*.d.ts",
-      "!**/node_modules/.bin",
-      "!**/*.{iml,o,hprof,orig,pyc,pyo,rbc,swp,csproj,sln,xproj}",
-      "!.editorconfig",
-      "!**/._*",
-      "!**/{.DS_Store,.git,.hg,.svn,CVS,RCS,SCCS,.gitignore,.gitattributes}",
-      "!**/{__pycache__,thumbs.db,.flowconfig,.idea,.vs,.nyc_output}",
-      "!**/{appveyor.yml,.travis.yml,circle.yml}",
-      "!**/{npm-debug.log,yarn.lock,.yarn-integrity,.yarn-metadata.json}"
-    ]
+    "asar": true
   }
 }

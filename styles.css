@@ -1,51 +1,329 @@
-/* Additional styles for the Grok Desktop application */
-
-/* Loading indicator */
-.loading-indicator {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  text-align: center;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-.loading-indicator .spinner {
-  width: 40px;
-  height: 40px;
-  margin: 0 auto;
-  border: 4px solid #f3f3f3;
-  border-top: 4px solid #3498db;
-  border-radius: 50%;
-  animation: spin 1s linear infinite;
+:root {
+  --deep-indigo: #1a0f3a;
+  --light-indigo: #2d1b69;
+  --love-pink: #ff69b4;
+  --light-gray: #f5f5f5;
+  --dark-gray: #333;
+  --border-color: #e0e0e0;
+  --success: #4caf50;
+  --error: #f44336;
+  --warning: #ff9800;
+  --font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 }
 
-@keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+html, body {
+  height: 100%;
+  font-family: var(--font-family);
+  background: white;
+  color: var(--dark-gray);
 }
 
-/* Error page */
-.error-page {
+.container {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  height: 100%;
+  height: 100vh;
+  background: white;
+}
+
+/* Header */
+.header {
+  background: linear-gradient(135deg, var(--deep-indigo) 0%, var(--light-indigo) 100%);
+  color: white;
   padding: 20px;
-  text-align: center;
-  background-color: #f8f9fa;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 }
 
-.error-page h1 {
+.header h1 {
   font-size: 24px;
-  margin-bottom: 10px;
-  color: #333;
+  margin-bottom: 4px;
 }
 
-.error-page p {
+.tagline {
+  font-size: 12px;
+  opacity: 0.9;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+}
+
+.status-indicator {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 8px 16px;
+  border-radius: 20px;
+}
+
+.status-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+.status-dot.online {
+  background: var(--success);
+}
+
+.status-dot.offline {
+  background: var(--dark-gray);
+}
+
+.status-dot.connecting {
+  background: var(--warning);
+  animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+#status-text {
+  font-size: 13px;
+  font-weight: 500;
+}
+
+/* Namespace Section */
+.namespace-section {
+  padding: 16px 20px;
+  background: var(--light-gray);
+  border-bottom: 1px solid var(--border-color);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.namespace-section label {
+  font-weight: 600;
+  color: var(--dark-gray);
+}
+
+.namespace-section select,
+.hub-url-input {
+  padding: 8px 12px;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  font-family: var(--font-family);
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.hub-url-input {
+  flex: 1;
+  max-width: 300px;
+  background: white;
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+.namespace-section select:hover {
+  border-color: var(--love-pink);
+}
+
+.namespace-section select:focus {
+  outline: none;
+  border-color: var(--love-pink);
+  box-shadow: 0 0 0 2px rgba(255, 105, 180, 0.1);
+}
+
+/* Main Content */
+.main-content {
+  flex: 1;
+  display: flex;
+  overflow: hidden;
+}
+
+.panel {
+  background: white;
+  border: 1px solid var(--border-color);
+  border-radius: 0;
+  padding: 20px;
+  box-shadow: none;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.panel h2 {
   font-size: 16px;
-  color: #666;
-  margin-bottom: 20px;
+  color: var(--deep-indigo);
+  margin-bottom: 16px;
+}
+
+/* Chat Panel */
+.chat-panel {
+  border: none;
+  border-radius: 0;
+}
+
+.chat-messages {
+  flex: 1;
+  overflow-y: auto;
+  margin-bottom: 16px;
+  padding: 12px;
+  background: var(--light-gray);
+  border-radius: 6px;
+}
+
+.chat-message {
+  margin-bottom: 12px;
+  padding: 12px;
+  border-radius: 6px;
+  max-width: 80%;
+  word-wrap: break-word;
+}
+
+.chat-message.user {
+  align-self: flex-end;
+  background: linear-gradient(135deg, var(--deep-indigo), var(--light-indigo));
+  color: white;
+  margin-left: auto;
+}
+
+.chat-message.hub {
+  align-self: flex-start;
+  background: white;
+  border: 1px solid var(--border-color);
+  color: var(--dark-gray);
+}
+
+.chat-message.system {
+  align-self: center;
+  background: var(--warning);
+  color: white;
+  font-size: 12px;
+  max-width: 100%;
+  text-align: center;
+}
+
+.placeholder {
+  color: #999;
+  text-align: center;
+  padding: 20px;
+}
+
+/* Chat Input */
+.chat-input-group {
+  display: flex;
+  gap: 8px;
+}
+
+.message-input {
+  flex: 1;
+  padding: 12px;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  font-family: var(--font-family);
+  font-size: 14px;
+}
+
+.message-input:focus {
+  outline: none;
+  border-color: var(--love-pink);
+  box-shadow: 0 0 0 2px rgba(255, 105, 180, 0.1);
+}
+
+/* Buttons */
+.btn {
+  padding: 10px 16px;
+  border: none;
+  border-radius: 6px;
+  font-family: var(--font-family);
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--deep-indigo), var(--light-indigo));
+  color: white;
+  min-width: 80px;
+}
+
+.btn-primary:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(26, 15, 58, 0.3);
+}
+
+.btn-secondary {
+  background: var(--love-pink);
+  color: white;
+  min-width: 80px;
+}
+
+.btn-secondary:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(255, 105, 180, 0.3);
+}
+
+/* Notification */
+.notification {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  padding: 16px 20px;
+  background: var(--deep-indigo);
+  color: white;
+  border-radius: 6px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  max-width: 300px;
+  opacity: 0;
+  transform: translateY(100px);
+  transition: all 0.3s ease;
+  z-index: 1000;
+}
+
+.notification.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.notification.success {
+  background: var(--success);
+}
+
+.notification.error {
+  background: var(--error);
+}
+
+.notification.warning {
+  background: var(--warning);
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--light-gray);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--love-pink);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--deep-indigo);
 }
 
 .error-page button {
