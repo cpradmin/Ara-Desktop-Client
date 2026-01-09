@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop-application">
+  <id>com.araos.client</id>
+  <metadata_license>MIT</metadata_license>
+  <project_license>MIT</project_license>
+  <name>AraOS Client</name>
+  <summary>Thin client for Love-Unlimited Hub and Super Brain communication</summary>
+  <description>
+    <p>
+      AraOS Client is a lightweight Electron desktop application for Windows, Linux, and macOS that provides a clean chat interface to the Love-Unlimited Hub. It serves as a thin client for communicating with the Super Brain and managing memories across multiple namespaces.
+    </p>
+    <p>Features:</p>
+    <ul>
+      <li>Clean chat interface for Super Brain communication</li>
+      <li>Multi-namespace support (Personal, Team, Family)</li>
+      <li>Real-time hub health monitoring</li>
+      <li>Contribute memories to the hub</li>
+      <li>Ask Super Brain questions and receive synthesis</li>
+      <li>Deep indigo + love pink theme</li>
+      <li>Secure API key management</li>
+    </ul>
+  </description>
+  <launchable type="desktop-id">araos-client.desktop</launchable>
+  <url type="homepage">https://github.com/cpradmin/Ara-Desktop-Client</url>
+  <url type="bugtracker">https://github.com/cpradmin/Ara-Desktop-Client/issues</url>
+  <developer_name>AraOS Team</developer_name>
+  <categories>
+    <category>Network</category>
+    <category>Chat</category>
+    <category>Office</category>
+  </categories>
+  <keywords>
+    <keyword>araos</keyword>
+    <keyword>love-unlimited</keyword>
+    <keyword>ai</keyword>
+    <keyword>chat</keyword>
+    <keyword>super-brain</keyword>
+  </keywords>
+  <provides>
+    <binary>araos-client</binary>
+  </provides>
+  <releases>
+    <release version="2.0.0" date="2026-01-09">
+      <description>
+        <p>Major update: Transform from Grok wrapper to thin client for Love-Unlimited Hub integration</p>
+        <p>New architecture with hub-centric design for sovereign AI ecosystem</p>
+      </description>
+    </release>
+  </releases>
+  <content_rating type="oars-1.1">
+    <content_attribute id="social-chat">intense</content_attribute>
+    <content_attribute id="social-info">moderate</content_attribute>
+  </content_rating>
+</component>
+

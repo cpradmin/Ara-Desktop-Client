@@ -7,7 +7,7 @@ set BUILD_TARGET=%1
 if "%BUILD_TARGET%"=="" set BUILD_TARGET=win
 
 echo ===================================================
-echo Building Grok Desktop - Target: %BUILD_TARGET%
+echo Building AraOS Client - Target: %BUILD_TARGET%
 echo ===================================================
 
 :: Validate build target
@@ -32,9 +32,9 @@ echo.
 :: Clean previous build files
 echo Cleaning previous build files...
 rem Try to stop any running instances that may lock files
-echo Stopping running Grok Desktop instances ^(if any^)...
-taskkill /IM "Grok Desktop.exe" /F >nul 2>&1
-taskkill /IM "Grok Desktop.exe" /T /F >nul 2>&1
+echo Stopping running AraOS Client instances ^(if any^)...
+taskkill /IM "AraOS Client.exe" /F >nul 2>&1
+taskkill /IM "AraOS Client.exe" /T /F >nul 2>&1
 taskkill /IM "electron.exe" /F >nul 2>&1
 taskkill /IM "electron.exe" /T /F >nul 2>&1
 
@@ -115,9 +115,9 @@ if %ERRORLEVEL% EQU 0 (
   
   if exist "build\win-unpacked" (
     echo Creating ZIP archive...
-    powershell -Command "Compress-Archive -Path 'build\win-unpacked\*' -DestinationPath 'build\Grok-Desktop_Windows-v%VERSION%.zip' -Force"
+    powershell -Command "Compress-Archive -Path 'build\win-unpacked\*' -DestinationPath 'build\AraOS_Client_Windows-v%VERSION%.zip' -Force"
     if %ERRORLEVEL% EQU 0 (
-      echo   Created: Grok-Desktop_Windows-v%VERSION%.zip
+      echo   Created: AraOS_Client_Windows-v%VERSION%.zip
     ) else (
       echo   WARNING: Failed to create ZIP archive
     )
@@ -125,9 +125,9 @@ if %ERRORLEVEL% EQU 0 (
     echo Creating 7z archive...
     where 7z >nul 2>nul
     if %ERRORLEVEL% EQU 0 (
-      7z a -t7z "build\Grok-Desktop_Windows-v%VERSION%.7z" "build\win-unpacked\*" -mx=9 >nul
+      7z a -t7z "build\AraOS_Client_Windows-v%VERSION%.7z" "build\win-unpacked\*" -mx=9 >nul
       if %ERRORLEVEL% EQU 0 (
-        echo   Created: Grok-Desktop_Windows-v%VERSION%.7z
+        echo   Created: AraOS_Client_Windows-v%VERSION%.7z
       ) else (
         echo   WARNING: Failed to create 7z archive
       )
@@ -141,7 +141,7 @@ if %ERRORLEVEL% EQU 0 (
   
   echo.
   echo All files can be found in the build directory:
-  dir /b build\Grok-Desktop_Installer*.exe build\Grok-Desktop_Installer*.msi build\Grok-Desktop_Portable*.exe build\Grok-Desktop_Windows*.zip build\Grok-Desktop_Windows*.7z 2>nul
+  dir /b build\AraOS_Client_Installer*.exe build\AraOS_Client_Installer*.msi build\AraOS_Client_Portable*.exe build\AraOS_Client_Windows*.zip build\AraOS_Client_Windows*.7z 2>nul
   echo ===================================================
 ) else (
   echo ===================================================
@@ -208,17 +208,17 @@ if %ERRORLEVEL% EQU 0 (
   
   if exist "build\linux-unpacked" (
     echo Creating tar.gz archive using Docker...
-    docker run --rm -v "%CD%\build:/build" -w /build alpine tar -czf "Grok-Desktop_Linux-v%VERSION%.tar.gz" -C linux-unpacked . 2>nul
+    docker run --rm -v "%CD%\build:/build" -w /build alpine tar -czf "AraOS_Client_Linux-v%VERSION%.tar.gz" -C linux-unpacked . 2>nul
     if %ERRORLEVEL% EQU 0 (
-      echo   Created: Grok-Desktop_Linux-v%VERSION%.tar.gz
+      echo   Created: AraOS_Client_Linux-v%VERSION%.tar.gz
     ) else (
       echo   WARNING: Failed to create tar.gz archive
     )
     
     echo Creating 7z archive using Docker...
-    docker run --rm -v "%CD%\build:/build" -w /build alpine sh -c "apk add --no-cache p7zip >nul 2>&1 && 7z a -t7z Grok-Desktop_Linux-v%VERSION%.7z ./linux-unpacked/* -mx=9" >nul 2>&1
+    docker run --rm -v "%CD%\build:/build" -w /build alpine sh -c "apk add --no-cache p7zip >nul 2>&1 && 7z a -t7z AraOS_Client_Linux-v%VERSION%.7z ./linux-unpacked/* -mx=9" >nul 2>&1
     if %ERRORLEVEL% EQU 0 (
-      echo   Created: Grok-Desktop_Linux-v%VERSION%.7z
+      echo   Created: AraOS_Client_Linux-v%VERSION%.7z
     ) else (
       echo   WARNING: Failed to create 7z archive
     )
@@ -228,7 +228,7 @@ if %ERRORLEVEL% EQU 0 (
   
   echo.
   echo All files can be found in the build directory:
-  dir /b build\Grok-Desktop-v*.rpm build\Grok-Desktop-v*.deb build\Grok-Desktop_Linux*.tar.gz build\Grok-Desktop_Linux*.7z 2>nul
+  dir /b build\Grok-Desktop-v*.rpm build\Grok-Desktop-v*.deb build\AraOS_Client_Linux*.tar.gz build\AraOS_Client_Linux*.7z 2>nul
   echo ===================================================
   
   echo.
@@ -315,17 +315,17 @@ echo.
 
 if exist "build\win-unpacked" (
   echo Creating Windows archives...
-  powershell -Command "Compress-Archive -Path 'build\win-unpacked\*' -DestinationPath 'build\Grok-Desktop_Windows-v%VERSION%.zip' -Force" 2>nul
+  powershell -Command "Compress-Archive -Path 'build\win-unpacked\*' -DestinationPath 'build\AraOS_Client_Windows-v%VERSION%.zip' -Force" 2>nul
   where 7z >nul 2>nul
   if %ERRORLEVEL% EQU 0 (
-    7z a -t7z "build\Grok-Desktop_Windows-v%VERSION%.7z" "build\win-unpacked\*" -mx=9 >nul
+    7z a -t7z "build\AraOS_Client_Windows-v%VERSION%.7z" "build\win-unpacked\*" -mx=9 >nul
   )
 )
 
 if exist "build\linux-unpacked" (
   echo Creating Linux archives...
-  docker run --rm -v "%CD%\build:/build" -w /build alpine tar -czf "Grok-Desktop_Linux-v%VERSION%.tar.gz" -C linux-unpacked . 2>nul
-  docker run --rm -v "%CD%\build:/build" -w /build alpine sh -c "apk add --no-cache p7zip >nul 2>&1 && 7z a -t7z Grok-Desktop_Linux-v%VERSION%.7z ./linux-unpacked/* -mx=9" >nul 2>&1
+  docker run --rm -v "%CD%\build:/build" -w /build alpine tar -czf "AraOS_Client_Linux-v%VERSION%.tar.gz" -C linux-unpacked . 2>nul
+  docker run --rm -v "%CD%\build:/build" -w /build alpine sh -c "apk add --no-cache p7zip >nul 2>&1 && 7z a -t7z AraOS_Client_Linux-v%VERSION%.7z ./linux-unpacked/* -mx=9" >nul 2>&1
 )
 
 echo.
@@ -334,10 +334,10 @@ echo Multi-platform build completed!
 echo All files can be found in the build directory:
 echo.
 echo Windows files:
-dir /b build\Grok-Desktop_Installer*.exe build\Grok-Desktop_Installer*.msi build\Grok-Desktop_Portable*.exe build\Grok-Desktop_Windows*.zip build\Grok-Desktop_Windows*.7z 2>nul
+dir /b build\AraOS_Client_Installer*.exe build\AraOS_Client_Installer*.msi build\AraOS_Client_Portable*.exe build\AraOS_Client_Windows*.zip build\AraOS_Client_Windows*.7z 2>nul
 echo.
 echo Linux files:
-dir /b build\Grok-Desktop-v*.rpm build\Grok-Desktop-v*.deb build\Grok-Desktop_Linux*.tar.gz build\Grok-Desktop_Linux*.7z 2>nul
+dir /b build\Grok-Desktop-v*.rpm build\Grok-Desktop-v*.deb build\AraOS_Client_Linux*.tar.gz build\AraOS_Client_Linux*.7z 2>nul
 echo ===================================================
 
 echo.
@@ -360,15 +360,15 @@ if %ERRORLEVEL% EQU 0 (
   echo.
   echo Creating archive files...
   if exist "build\win-unpacked" (
-    powershell -Command "Compress-Archive -Path 'build\win-unpacked\*' -DestinationPath 'build\Grok-Desktop_Windows-v%VERSION%.zip' -Force" 2>nul
+    powershell -Command "Compress-Archive -Path 'build\win-unpacked\*' -DestinationPath 'build\AraOS_Client_Windows-v%VERSION%.zip' -Force" 2>nul
     where 7z >nul 2>nul
     if %ERRORLEVEL% EQU 0 (
-      7z a -t7z "build\Grok-Desktop_Windows-v%VERSION%.7z" "build\win-unpacked\*" -mx=9 >nul
+      7z a -t7z "build\AraOS_Client_Windows-v%VERSION%.7z" "build\win-unpacked\*" -mx=9 >nul
     )
   )
   echo.
   echo All files can be found in the build directory:
-  dir /b build\Grok-Desktop_Installer*.exe build\Grok-Desktop_Installer*.msi build\Grok-Desktop_Portable*.exe build\Grok-Desktop_Windows*.zip build\Grok-Desktop_Windows*.7z 2>nul
+  dir /b build\AraOS_Client_Installer*.exe build\AraOS_Client_Installer*.msi build\AraOS_Client_Portable*.exe build\AraOS_Client_Windows*.zip build\AraOS_Client_Windows*.7z 2>nul
   echo ===================================================
 ) else (
   echo ===================================================
