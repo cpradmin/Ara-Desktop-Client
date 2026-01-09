@@ -52,7 +52,7 @@ function createWindow() {
 }
 
 // IPC handlers for Hub communication
-ipcMain.handle('hub-request', async (event, { endpoint, method, data }) => {
+ipcMain.handle('hub-request', async (event, { endpoint, method, data, params }) => {
   try {
     const config = {
       method,
@@ -66,6 +66,10 @@ ipcMain.handle('hub-request', async (event, { endpoint, method, data }) => {
 
     if (data) {
       config.data = data;
+    }
+
+    if (params) {
+      config.params = params;
     }
 
     const response = await axios(config);

@@ -21,7 +21,7 @@ contextBridge.exposeInMainWorld('araos', {
     return ipcRenderer.invoke('hub-request', {
       endpoint: '/recall',
       method: 'GET',
-      data: options
+      params: options
     });
   },
 
@@ -30,7 +30,7 @@ contextBridge.exposeInMainWorld('araos', {
     return ipcRenderer.invoke('hub-request', {
       endpoint: '/super_brain/contribute',
       method: 'POST',
-      data: { memory, namespace, timestamp: new Date().toISOString() }
+      data: { content: memory, namespace, timestamp: new Date().toISOString() }
     });
   },
 
