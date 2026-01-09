@@ -39,7 +39,7 @@ contextBridge.exposeInMainWorld('araos', {
     return ipcRenderer.invoke('hub-request', {
       endpoint: '/super_brain/think',
       method: 'POST',
-      data: { prompt, namespace, timestamp: new Date().toISOString() }
+      data: { query: prompt, namespace, timestamp: new Date().toISOString() }
     });
   }
 }); 
