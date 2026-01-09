@@ -19,7 +19,10 @@
     "desktop",
     "client"
   ],
-  "author": "AraOS Team",
+  "author": {
+    "name": "AraOS Team",
+    "email": "team@araos.dev"
+  },
   "license": "MIT",
   "type": "commonjs",
   "dependencies": {
