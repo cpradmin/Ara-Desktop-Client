@@ -1,5 +1,5 @@
 #!/bin/bash
-# Post-install script for Grok Desktop RPM
+# Post-install script for AraOS Client RPM
 
 # Update desktop database
 if command -v update-desktop-database &> /dev/null; then

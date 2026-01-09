@@ -1,11 +1,63 @@
-# Changelog
+# AraOS Client - Changelog
 
 All notable changes to this project will be documented in this file.
 
 The format is based on Keep a Changelog, and this project adheres to Semantic Versioning.
 
+## [2.0.0] - 2026-01-09
+
+### Changed
+- **Major Rebrand**: Transformed from Grok Desktop wrapper to AraOS Client
+- **Architecture**: Complete rewrite - now a thin client for Love-Unlimited Hub instead of Grok.com wrapper
+- **UI**: New chat interface for Super Brain communication with namespace selector
+- **Backend**: Removed webview/tab system, now communicates via REST API to ara-os-desktop hub
+- **Theme**: Updated to deep indigo (#1a0f3a) + love pink (#ff69b4) color scheme
+- **Features**: Simplified interface focused on memory contribution and Super Brain synthesis
+
+### Removed
+- Grok.com webview wrapper and multi-tab system
+- GPU acceleration workarounds (no longer needed)
+- Always-on-top functionality (not needed for thin client)
+- Keyboard shortcuts specific to Grok
+- Usage statistics monitoring
+
+### Added
+- Hub health monitoring and connection status
+- Namespace switching (jon, shared-work, shared-friendship)
+- Memory contribution interface
+- Super Brain synthesis requests
+- Love-Unlimited Hub API integration
+
+### Migration Note
+This is a major version bump representing a fundamental shift in application purpose. See README.md for new architecture and usage.
+
+---
 
 ## [1.2.5] - 2025-12-17
+
+### Fixed
+- **Usage Stats 403 Error** - Fixed "Login required" error on Windows 11 by executing API fetch in webview context instead of main process
+  - Thanks to Joshua Wang (@JoshuaWang2211) for identifying the root cause and suggesting the solution
+  - API calls now run in the authenticated Grok tab context with proper session cookies and headers
+  - Resolves GitHub Issue #11
+
+### Changed
+- Bump version to 1.2.5
+
+## [1.2.4] - 2025-12-14
+
+### Security
+- **Domain Bypass Protection** - Prevents malicious subdomain attacks on trusted domains
+- **Enhanced External URL Validation** - Validates protocols, hostnames, and blocks localhost/private IPs
+- **Secure Update URL Validation** - Ensures GitHub release URLs are legitimate before storage
+- **OAuth Domain Support** - Allows Google, Apple, and X OAuth flows to remain in-app instead of opening external browsers
+- **Shortcut keys and mouse** - Added more shortcut key and mouse scroll support to tab functionality.
+- **Live stats** - Added live status stats bar.
+
+### Changed
+- Bump version to 1.2.4
+
+## [1.2.3] - 2025-11-08
 
 ### Fixed
 - **Usage Stats 403 Error** - Fixed "Login required" error on Windows 11 by executing API fetch in webview context instead of main process
@@ -98,7 +150,10 @@ The format is based on Keep a Changelog, and this project adheres to Semantic Ve
 ### Added
 - Initial pre-release of Grok Desktop
 
- [Unreleased]: https://github.com/AnRkey/Grok-Desktop/compare/v1.2.5...HEAD
+[2.0.0]: https://github.com/cpradmin/Ara-Desktop-Client/releases/tag/v2.0.0
+[Unreleased]: https://github.com/cpradmin/Ara-Desktop-Client/compare/v2.0.0...HEAD
+
+<!-- Historical Grok Desktop versions (for reference only) -->
 [1.2.5]: https://github.com/AnRkey/Grok-Desktop/releases/tag/v1.2.5
 [1.2.4]: https://github.com/AnRkey/Grok-Desktop/releases/tag/v1.2.4
 [1.2.3]: https://github.com/AnRkey/Grok-Desktop/releases/tag/v1.2.3
